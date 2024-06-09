@@ -57,8 +57,11 @@ def main():
 
     # Display results
     print("\nMagazines:")
-    for magazine in magazines:
-        print(Magazine(magazine["id"], magazine["name"], magazine["category"]))
+    magazines = author.magazines()
+    for mag in magazines:
+        print(mag)
+    #for magazine in magazines:
+        #print(Magazine(magazine["id"], magazine["name"], magazine["category"]))
 
     print("\nAuthors:")
     authors = author.articles()
