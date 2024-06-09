@@ -35,6 +35,18 @@ class Magazine:
         articles = cursor.fetchall()
         conn.close()
         return articles
+    
+    def contributors(self):
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT DISTINCT authors.* FROM authors
+            JOIN articles ON authors.id = articles.author_id
+            WHERE articles.magazine_id = ?
+        ''', (self.id,))
+        authors = cursor.fetchall()
+        conn.close()
+        return authors
 
 
     def __repr__(self):
