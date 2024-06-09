@@ -55,6 +55,20 @@ class Magazine:
         titles = [row['title'] for row in cursor.fetchall()]
         conn.close()
         return titles
+    
+    def contributing_authors(self):
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute('''
+            SELECT authors.* FROM authors
+            JOIN articles ON authors.id = articles.author_id
+            WHERE articles.magazine_id = ?
+            GROUP BY authors.id
+            HAVING COUNT(articles.id) > 2
+       ''', (self.id,))
+        authors = cursor.fetchall()
+        conn.close()
+        return authors
 
     def __repr__(self):
-        return f'<Magazine {self.name}>'
+        return f'<Magazine {self.name}, {self.category}>'
