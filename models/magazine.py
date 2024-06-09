@@ -47,7 +47,14 @@ class Magazine:
         authors = cursor.fetchall()
         conn.close()
         return authors
-
+    
+    def article_titles(self):
+        conn = get_db_connection
+        cursor = conn.cursor()
+        cursor.execute('SELECT title FROM articles WHERE magazine_id = ?', (self.id,))
+        titles = [row['title'] for row in cursor.fetchall()]
+        conn.close()
+        return titles
 
     def __repr__(self):
         return f'<Magazine {self.name}>'
