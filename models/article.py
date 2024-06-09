@@ -22,7 +22,21 @@ class Article:
         conn.commit()
         conn.close()
     
-
+    @property
+    def id(self):
+        return self._id
+    @property
+    def title(self):
+        return self._title
+    @property
+    def content(self):
+        return self._content
+    @property
+    def author(self):
+        return self._author
+    @property
+    def magazine(self):
+        return self._magazine
 
     def __repr__(self):
         return f'<Article {self.title}>'
