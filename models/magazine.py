@@ -26,7 +26,9 @@ class Magazine:
         self._name = value
         conn = get_db_connection
         cursor = conn.cursor()
-        cursor.execute()
+        cursor.execute('UPDATE magazines SET name = ? WHERE id = ?', (value, self.id))
+        conn.commit()
+        conn.close()
     
     @property
     def category(self):

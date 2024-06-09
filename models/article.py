@@ -3,12 +3,12 @@ from models.author import Author
 from models.magazine import Magazine
 
 class Article:
-    def __init__(self, id, title, content, author_id, magazine_id):
-        self.id = None
-        self.title = title
-        self.content = content
-        self.author_id = author_id
-        self.magazine_id = magazine_id
+    def __init__(self, title, content, author, magazine):
+        self._id = None
+        self._title = title
+        self._content = content
+        self._author = author
+        self._magazine = magazine
         self.save()
     
     def save(self):
