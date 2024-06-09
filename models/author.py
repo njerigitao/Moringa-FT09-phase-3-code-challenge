@@ -2,8 +2,10 @@ from database.connection import get_db_connection
 
 class Author:
     def __init__(self, id, name):
-        self.id = id
+        self.id = None
         self.name = name
+    
+    def save (self):
         conn = get_db_connection
         cursor = conn.cursor()
         cursor.execute('INSERT INTO authors (name) VALUES (?)', (self._name,))
@@ -24,7 +26,7 @@ class Author:
         cursor.execute('SELECT * FROM articles WHERE author_id = ?', (self.id,))
         articles = cursor.fetchall()
         conn.close()
-        return [Article(row[1], self, Magazine(row[3], '')) for row in articles]
+        return articles
     
     def magazines(self):
         conn = get_db_connection()
@@ -37,7 +39,7 @@ class Author:
         ''', (self.id,))
         magazines = cursor.fetchall()
         conn.close()
-        return [Magazine(row[1], row[2]) for row in magazines]
+        return magazines
 
     def __repr__(self):
         return f'<Author {self.name}>'
