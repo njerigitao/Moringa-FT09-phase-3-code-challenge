@@ -1,9 +1,10 @@
 from database.connection import get_db_connection
 
 class Author:
-    def __init__(self, id, name):
-        self.id = None
-        self.name = name
+    def __init__(self, name):
+        self._id = None
+        self._name = name
+        self.save()
     
     def save (self):
         conn = get_db_connection
@@ -12,6 +13,7 @@ class Author:
         self._id = cursor.lastrowid
         conn.commit()
         conn.close()
+        
     @property
     def id(self):
         return self._id

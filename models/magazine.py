@@ -1,10 +1,10 @@
 from database.connection import get_db_connection
 
 class Magazine:
-    def __init__(self, id, name, category):
-        self.id = id
-        self.name = name
-        self.category = category
+    def __init__(self, name, category):
+        self._id = None
+        self._name = name
+        self._category = category
         self.save()
     
     def save(self):
@@ -14,6 +14,19 @@ class Magazine:
         self._id = cursor.lastrowid
         conn.commit()
         conn.close()
+    
+    @property
+    def id(self):
+        return self._id
+    @property
+    def name(self):
+        return self._name
+    @name.setter
+    def name(self, value):
+        self._name = value
+        conn = get_db_connection
+        cursor = conn.cursor()
+        cursor.execute()
     
     @property
     def category(self):

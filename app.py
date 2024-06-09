@@ -36,6 +36,7 @@ def main():
     #magazine_id = cursor.lastrowid # Use this to fetch the id of the newly created magazine
 
     # Create an article
+    article = Article(article_title, article_content, author, magazine)
     #cursor.execute('INSERT INTO articles (title, content, author_id, magazine_id) VALUES (?, ?, ?, ?)',
                    #(article_title, article_content, author_id, magazine_id))
 
@@ -71,8 +72,15 @@ def main():
         #print(Author(author["id"], author["name"]))
 
     print("\nArticles:")
-    for article in articles:
-        print(Article(article["id"], article["title"], article["content"], article["author_id"], article["magazine_id"]))
+    articles = magazine.articles()
+    for art in articles:
+        print(art)
+    #for article in articles:
+        #print(Article(article["id"], article["title"], article["content"], article["author_id"], article["magazine_id"]))
+    print("\nMagazine Contributors:")
+    contributors = magazine.contributors()
+    for contributor in contributors:
+        print(contributor)
 
 if __name__ == "__main__":
     main()
