@@ -11,6 +11,22 @@ class Magazine:
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute('INSERT INTO magazines (name, category) VALUES (?, ?)', (self._name, self._category))
+        self._id = cursor.lastrowid
+        conn.commit()
+        conn.close()
+    
+    @property
+    def category(self):
+        return self._category
+    
+    @category.setter
+    def category(self, value):
+        self._category = value
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute('UPDATE magazines SET category = ? WHERE id = ?', (value, self.id))
+        conn.commit()
+        conn.close()
 
 
     def __repr__(self):
