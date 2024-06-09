@@ -2,6 +2,7 @@ import unittest
 from models.author import Author
 from models.article import Article
 from models.magazine import Magazine
+from database.setup import create_tables
 
 class TestModels(unittest.TestCase):
     def test_author_creation(self):
