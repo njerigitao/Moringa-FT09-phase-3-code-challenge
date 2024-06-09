@@ -5,16 +5,22 @@ from models.magazine import Magazine
 from database.setup import create_tables
 
 class TestModels(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        create_tables()
+
     def test_author_creation(self):
-        author = Author(1, "John Doe")
+        author = Author("John Doe")
         self.assertEqual(author.name, "John Doe")
 
     def test_article_creation(self):
-        article = Article(1, "Test Title", "Test Content", 1, 1)
+        author = Author("John Doe")
+        magazine = Magazine("Tech Weekly", "Technology")
+        article = Article("Test Title", "Test Content", author, magazine)
         self.assertEqual(article.title, "Test Title")
 
     def test_magazine_creation(self):
-        magazine = Magazine(1, "Tech Weekly")
+        magazine = Magazine("Tech Weekly", "Technology")
         self.assertEqual(magazine.name, "Tech Weekly")
 
 if __name__ == "__main__":
