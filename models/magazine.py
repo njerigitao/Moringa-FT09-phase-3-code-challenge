@@ -27,6 +27,14 @@ class Magazine:
         cursor.execute('UPDATE magazines SET category = ? WHERE id = ?', (value, self.id))
         conn.commit()
         conn.close()
+    
+    def articles(self):
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM articles WHERE magazine_id = ?', (self.id,))
+        articles = cursor.fetchall()
+        conn.close()
+        return articles
 
 
     def __repr__(self):
