@@ -18,6 +18,9 @@ class TestModels(unittest.TestCase):
         magazine = Magazine("Tech Weekly", "Technology")
         article = Article("Test Title", "Test Content", author, magazine)
         self.assertEqual(article.title, "Test Title")
+        self.assertEqual(article.content, "Test Content")
+        self.assertEqual(article.author.name, "John Doe")
+        self.assertEqual(article.magazine.name, "Tech Weekly")
 
     def test_magazine_creation(self):
         magazine = Magazine("Tech Weekly", "Technology")
